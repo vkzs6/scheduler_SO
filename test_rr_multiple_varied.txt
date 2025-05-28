@@ -1,0 +1,3 @@
+TaskA,1,12
+TaskB,2,8
+TaskC,1,25

@@ -1,0 +1,3 @@
+TaskP1A,1,15
+TaskP1B,1,15
+TaskP2A,2,10
