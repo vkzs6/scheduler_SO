@@ -11,6 +11,7 @@ clean:
 	rm -rf *.o
 	rm -rf rr_p 
 	rm -rf edf
+	rm -rf rr
 
 
 rr_p: driver.o list.o CPU.o schedule_rr_p.o
@@ -24,6 +25,12 @@ driver.o: driver.c
 
 schedule_rr_p.o: schedule_rr_p.c
 	$(CC) $(CFLAGS) -c schedule_rr_p.c
+
+schedule_rr.o: schedule_rr.c
+	$(CC) $(CFLAGS) -c schedule_rr.c
+
+rr: driver.o list.o CPU.o schedule_rr.o
+	$(CC) $(CFLAGS) -o rr driver.o schedule_rr.o list.o CPU.o -pthread
 
 schedule_edf.o: schedule_edf.c
 	$(CC) $(CFLAGS) -c schedule_edf.c

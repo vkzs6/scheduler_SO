@@ -8,7 +8,7 @@
 
 // Limiar de Envelhecimento: Quantas unidades de tempo uma tarefa espera
 // antes que sua prioridade seja aumentada.
-#define AGING_THRESHOLD 3
+#define AGING_THRESHOLD 10
 
 // Prioridade Máxima: A prioridade mais alta que uma tarefa pode alcançar (1, conforme o projeto).
 #define MAX_EFFECTIVE_PRIORITY 1

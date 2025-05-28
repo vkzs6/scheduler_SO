@@ -4,10 +4,10 @@
 
 #include "task.h"
 #include "list.h"
-//#include "schedule_pa.h"
-// #include "schedule_edf.h" // Comentado - para o escalonador EDF
-// #include "schedule_rr.h"  // Comentado - para o escalonador Round-Robin
-#include "schedule_rr_p.h" // Incluído - para o escalonador Round-Robin com Prioridade
+#include "schedule_pa.h"
+//#include "schedule_edf.h" // Comentado - para o escalonador EDF
+//#include "schedule_rr.h"  // Comentado - para o escalonador Round-Robin
+//#include "schedule_rr_p.h" // Incluído - para o escalonador Round-Robin com Prioridade
 
 #define SIZE    100 // Tamanho do buffer para ler linhas do arquivo
 
@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     char *name;
     int priority;
     int burst;
-    // int deadline; // Comentado, usado apenas para EDF
+    //int deadline; // Comentado, usado apenas para EDF
 
     if (argc < 2) { // Verifica se o nome do arquivo foi passado como argumento
         fprintf(stderr, "Uso: %s <arquivo_de_entrada>\n", argv[0]);
@@ -38,22 +38,22 @@ int main(int argc, char *argv[])
         name = strsep(&temp,",");
         priority = atoi(strsep(&temp,",")); // Converte string para inteiro
         burst = atoi(strsep(&temp,","));
-        // deadline = atoi(strsep(&temp, ",")); // Linha para ler o deadline, se necessário
+        //deadline = atoi(strsep(&temp, ",")); // Linha para ler o deadline, se necessário
         
         // add the task to the scheduler's list of tasks
-        // add(name,priority,burst, deadline); // Chamada genérica, talvez para EDF [cite: 7]
-        // rr_add(name, priority, burst);      // Para Round-Robin simples (comentado)
-        rr_p_add(name,priority,burst);      // Chamada para adicionar tarefa no RR com Prioridade
-        //pa_add(name, priority, burst);
+        //edf_add(name,priority,burst, deadline); // Chamada genérica, talvez para EDF [cite: 7]
+        //rr_add(name, priority, burst);      // Para Round-Robin simples (comentado)
+        //rr_p_add(name,priority,burst);      // Chamada para adicionar tarefa no RR com Prioridade
+        pa_add(name, priority, burst);
         free(temp); // Libera a memória da string duplicada
     }
 
     fclose(in); // Fecha o arquivo
 
     // invoke the scheduler
-    // schedule();       // Chamada genérica para o escalonador
-    // rr_schedule();    // Chamada para o escalonador RR (comentado)
-    rr_p_schedule();  // Chama a função principal do escalonador RR com Prioridade
-    //pa_schedule();
+    //rr_schedule();    // Chamada para o escalonador RR (comentado)
+    //rr_p_schedule();  // Chama a função principal do escalonador RR com Prioridade
+    pa_schedule();
+    //edf_schedule();
     return 0;
 }
